@@ -1,5 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useState } from 'react';
+import WebDesigner from './Workers/WebDesigner';
+import WebDevelopment from './Workers/WebDevelopment';
+import PosterDesign from './Workers/PosterDesign';
+import Illustration from './Workers/Illustration';
+import SocialMediaDesign from './Workers/SocialMediaDesign';
 
 
 // NOTE: nichay ya to ham 5 li banaty aus ki jaga yaha data array bana lia ais ko List yani ul may map kar lain gay
@@ -113,6 +119,8 @@ flex:1;
 
 
 const Works = () => {
+
+  const [work, setWork] = useState("Web Designer")
   return (
     <Section>
       <Container>
@@ -120,13 +128,14 @@ const Works = () => {
             {/* NOTE: yaha use kar lia data.map phir same ak var aur item ka name vo print karay ga aur hamaysha aus ko unique key dani hoti hay jo kay ham nay item rakh di hay */}
           <List>
             {data.map((item) => (
-              <ListItem key={item} text={item}>{item}</ListItem>
+              <ListItem key={item} text={item} onClick={() => setWork(item)}>{item}</ListItem>
               // NOTE: ya text={item} ham nay prop pass kia hay
             ))}
           </List>
         </Left>
         <Right>
-                    {/*3D model in it  */}
+          {/* Condition of diff 3D models that shown when click on any type */}
+          {work === "Web Designer"? (<WebDesigner/>) : work === "Development" ? (<WebDevelopment/>) : work === "Illustration" ? (<Illustration/>) : work === "Poster Design" ? (<PosterDesign/>) : work === "Social Media Design" ? (<SocialMediaDesign/>) : (<WebDesigner/>) }
         </Right>
       </Container>
     </Section>
